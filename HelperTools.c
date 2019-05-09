@@ -22,9 +22,9 @@ void InterFace(CacheInfo *cacheinfo)
 	  printf("                                                              \n");
     printf("                ##############################################\n");
     printf("                ### 计算机组成原理Cache命中率模拟结课作业  ###\n");
-    printf("                ###          学院：计算机学院              ###\n");
-    printf("                ###         学号:2016000001111             ###\n");
-    printf("                ###            姓名：冯小丽                ###\n");
+    printf("                ###      学院：计算机科学与工程学院        ###\n");
+    printf("                ###         学号:201671010107              ###\n");
+    printf("                ###           姓名：冯小丽                 ###\n");
     printf("                ##############################################\n");
     printf("                                                              \n");
     printf("                                                              \n");
@@ -33,6 +33,10 @@ void InterFace(CacheInfo *cacheinfo)
     scanf("%ld",&cacheSize);
     puts("                 请输入cache的行大小(单位:B)");
     scanf("%ld",&cacheLineSize);
+    
+    puts("                 本程序采用映射方式：直接关联");
+    puts("                 本程序采用替换策略：直接关联不替换");
+
     
     struct blockInfo bInf; 
     unsigned long temp = cacheLineSize; 
@@ -98,14 +102,14 @@ void OutputResult(CacheInfo *cacheinfo)
 	  printf("                 \n");
 	  printf("                 \n");
 	  sleep(1);                
-	  printf("                 ##############################################\n");
+	  printf("                 ################################################\n");
     sleep(1); 
-    printf("                 ###   平均命中率为：       %02ld  %%           ###\n",(cacheinfo->hitNum)*100/cacheinfo->totalNum);
+    printf("                 ###   平均命中率为：       %02.4f  %%        ###\n",(float)(cacheinfo->hitNum)*100/cacheinfo->totalNum);
     sleep(1); 
-    printf("                 ###   读操作命中率为：     %02ld  %%           ###\n",(cacheinfo->hitReadNum)*100/cacheinfo->ReadNum);
+    printf("                 ###   读操作命中率为：     %02.4f  %%        ###\n",(float)(cacheinfo->hitReadNum)*100/cacheinfo->ReadNum);
     sleep(1); 
-    printf("                 ###   写操作命中率为：     %02ld  %%           ###\n",(cacheinfo->hitWriteNum)*100/cacheinfo->WriteNum); 
-    printf("                 ##############################################\n");
+    printf("                 ###   写操作命中率为：     %02.4f  %%        ###\n",(float)(cacheinfo->hitWriteNum)*100/cacheinfo->WriteNum); 
+    printf("                 ################################################\n");
 
 	  
 }
