@@ -202,7 +202,7 @@ void CalclateRatio(CacheInfo *cacheInfo,HitRatio *hitRatio)
     while(!in_file.eof())
     {
         in_file.getline(address,13);
-        bool __attribute__((unused)) is_success = GetHitNum(cacheInfo,address); 
+        bool __attribute__((unused)) is_success = GetShotCount(cacheInfo,address); 
         cacheInfo->totalNum++;
         
         memset(tempSS,0,sizeof(tempSS));
@@ -217,12 +217,11 @@ void CalclateRatio(CacheInfo *cacheInfo,HitRatio *hitRatio)
 }
 
 
-bool GetHitNum(CacheInfo *cacheInfo,char *address)
+bool GetShotCount(CacheInfo *cacheInfo,char *address)
 {
     bool is_store = false;
     bool is_load = false;
-    //bool is_space = false;
-    bool hit = false;
+    bool shootTheTarget = false;
 
     switch(address[0])
     {
@@ -235,40 +234,40 @@ bool GetHitNum(CacheInfo *cacheInfo,char *address)
             break;
         
         case '\0':
-            break; //In case of space lines
+            break; 
         
         default:
             return false;
     }
     unsigned long int temp = 0;
     temp = strtoul(address+2,NULL,16);
-    bitset<32> flags(temp); // flags if the binary of address
-    hit = IsHit(cacheInfo,flags);
+    bitset<32> flags(temp); 
+    shootTheTarget = ifShot(cacheInfo,flags);
 
-    if( hit && is_load ) // 命中，读操作
+    if( shootTheTarget && is_load ) 
     {
         cacheInfo->hitNum++;
         cacheInfo->hitReadNum++;
         cacheInfo->ReadNum++;
     }
-    else if(hit && is_store) // 命中，写操作
+    else if(shootTheTarget && is_store) 
     {
         cacheInfo->hitNum++;
         cacheInfo->hitWriteNum++;
         cacheInfo->WriteNum++;
-        cache_simulator[curSor][29] = true; //设置dirty为true
+        cache_simulator[curSor][29] = true; 
     }
-    else if((!hit) && is_load) // 没命中，读操作
+    else if((!shootTheTarget) && is_load) 
     {
         cacheInfo->ReadNum++;
 
-        GetRead(cacheInfo,flags); // read data from memory
+        GetRead(cacheInfo,flags); 
     }
-    else if((!hit) && is_store) // 没命中，写操作
+    else if((!shootTheTarget) && is_store) 
     {
         cacheInfo->WriteNum++;
-        GetRead(cacheInfo,flags); // read data from memory
-        cache_simulator[curSor][29] = true; //设置dirty为true
+        GetRead(cacheInfo,flags); 
+        cache_simulator[curSor][29] = true; 
     }
     else
     {
@@ -279,11 +278,11 @@ bool GetHitNum(CacheInfo *cacheInfo,char *address)
     return true;
 }
 
-bool IsHit(CacheInfo *cacheInfo,bitset<32> flags)
+bool ifShot(CacheInfo *cacheInfo,bitset<32> flags)
 {
     bool ret = false;
 
-    bitset<32> flags_line; // a temp variable
+    bitset<32> flags_line; 
     int j = 0;
     int i = 0;
 
@@ -294,13 +293,13 @@ bool IsHit(CacheInfo *cacheInfo,bitset<32> flags)
 
     curSor = flags_line.to_ulong();
 
-    if(cache_simulator[curSor][30]==true) //判断hit位是否为真
+    if(cache_simulator[curSor][30]==true) 
     {
         ret = true;
         
         int i = 0;
         int j = 0;    
-        for( i=31, j=28; i>(31ul-(cacheInfo->blkInf).bitTag); i--,j--) //判断标记是否相同,i:address,j:cache
+        for( i=31, j=28; i>(31ul-(cacheInfo->blkInf).bitTag); i--,j--) 
         {
             if( flags[i] != cache_simulator[curSor][j] )
             {
@@ -314,43 +313,32 @@ bool IsHit(CacheInfo *cacheInfo,bitset<32> flags)
 
 void GetRead(CacheInfo *cacheInfo,bitset<32> flags)
 {
-    if(cache_simulator[curSor][30] == false) //hit is false
+    if(cache_simulator[curSor][30] == false) 
     {
     	  int i = 0;
     	  int j = 28;
-        for(i=31,j=28; i>(31ul-cacheInfo->blkInf.bitTag); i--,j--) //设置标记
+        for(i=31,j=28; i>(31ul-cacheInfo->blkInf.bitTag); i--,j--) 
         {
             cache_simulator[curSor][j] = flags[i];
         }
-        cache_simulator[curSor][30] = true; //设置hit位为true
+        cache_simulator[curSor][30] = true; 
     }
     else
     {
-        GetReplace(cacheInfo,flags);
+        change(cacheInfo,flags);
     }
 }
 
-void GetReplace(CacheInfo *cacheInfo,bitset<32> flags)
-{
-    if(cache_simulator[curSor][29] == true) //dirty位必须为1才写入
-    {
-        GetWrite(); //写入内存
-    }
-    
+void change(CacheInfo *cacheInfo,bitset<32> flags)
+{   
     int i = 0;
     int j = 0;
-    for( i=31, j=28; i>(31ul-cacheInfo->blkInf.bitTag); i--,j--) //设置标记
+    for( i=31, j=28; i>(31ul-cacheInfo->blkInf.bitTag); i--,j--) 
     {
         cache_simulator[curSor][j] = flags[i];
     }
-
-    cache_simulator[curSor][30] = true; //设置hit位为true
+    cache_simulator[curSor][30] = true; 
 }
 
-void GetWrite() //写入内存
-{
-    cache_simulator[curSor][29] = false; //设置dirty为false
-    cache_simulator[curSor][30] = false; //设置hit为false
-}
 
 

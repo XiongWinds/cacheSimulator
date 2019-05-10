@@ -6,10 +6,9 @@
 using namespace std;
 
 void CalclateRatio(CacheInfo *cacheInfo,HitRatio *hitRatio);
-bool GetHitNum(CacheInfo *cacheInfo,char *address);
-bool IsHit(CacheInfo *cacheInfo,bitset<32> flags);
+bool GetShotCount(CacheInfo *cacheInfo,char *address);
+bool ifShot(CacheInfo *cacheInfo,bitset<32> flags);
 void GetRead(CacheInfo *cacheInfo,bitset<32> flags);
-void GetReplace(CacheInfo *cacheInfo,bitset<32> flags);
-void GetWrite();
+void change(CacheInfo *cacheInfo,bitset<32> flags);
 
 #endif

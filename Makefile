@@ -6,9 +6,8 @@ OBJS = CacheSimulator.o Hit.o HelperTools.o
 
 all:$(TARGET)
     
-
 clean: 
-	$(RM)  *.exe *.o
+	$(RM)  *.exe *.o *.bak
     
 CacheSimulator: ${OBJS}
 	$(CC)  -o CacheSimulator ${OBJS} -Wall

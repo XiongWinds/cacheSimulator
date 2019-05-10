@@ -23,8 +23,8 @@ void InterFace(CacheInfo *cacheinfo)
     printf("                ##############################################\n");
     printf("                ### 计算机组成原理Cache命中率模拟结课作业  ###\n");
     printf("                ###      学院：计算机科学与工程学院        ###\n");
-    printf("                ###         学号:201671010107              ###\n");
-    printf("                ###           姓名：冯小丽                 ###\n");
+    printf("                ###         学号:000000000000              ###\n");
+    printf("                ###           姓名：XXX                    ###\n");
     printf("                ##############################################\n");
     printf("                                                              \n");
     printf("                                                              \n");
@@ -35,7 +35,7 @@ void InterFace(CacheInfo *cacheinfo)
     scanf("%ld",&cacheLineSize);
     
     puts("                 本程序采用映射方式：直接关联");
-    puts("                 本程序采用替换策略：直接关联不替换");
+    puts("                 本程序采用替换策略：直接替换");
 
     
     struct blockInfo bInf; 
@@ -93,12 +93,29 @@ void OutputResult(CacheInfo *cacheinfo)
 	  printf("cacheinfo->WriteNum==%ld\n",cacheinfo->WriteNum);
 	  printf("cacheinfo->unknownNum==%ld\n",cacheinfo->unknownNum);
 #endif	  
+    
+    printf("\n");
+	  printf("                 ################################################\n");
+	  printf("                 ###            cache配置参数说明             ###\n");
+	  printf("                 ###            cache总容量: %06ld KB        ###\n",cacheinfo->icacheSize);
+	  printf("                 ###            cache行容量: %06ld B         ###\n",cacheinfo->icacheLineSize);
+	  printf("                 ###            cache行数: %06ld             ###\n",cacheinfo->blkInf.numLine);
+	  printf("                 ###            cache命中读数量: %06ld       ###\n",cacheinfo->hitReadNum);
+	  printf("                 ###            cache命中写数量: %06ld       ###\n",cacheinfo->hitWriteNum);
+	  printf("                 ###            cache命中总数量: %06ld       ###\n",cacheinfo->hitNum);
+	  printf("                 ###            测试程序地址总数量: %06ld    ###\n",cacheinfo->totalNum);
+	  printf("                 ################################################\n");
+    printf("\n");
+    printf("\n");
+    
+
+
+
     printf("                 程序正在运行中，请稍等...\n");
     sleep(3);                
     printf("                 程序正在运行中，请稍等...\n");
     sleep(3);                
 	  printf("                 程序运行完成，最终结果如下所示：\n");
-	  printf("                 \n");
 	  printf("                 \n");
 	  printf("                 \n");
 	  sleep(1);                
