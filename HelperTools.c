@@ -15,16 +15,16 @@ void LogNormalInfo(char * ss)
 }
 void InterFace(CacheInfo *cacheinfo)
 {
-	  unsigned long cacheSize;
-	  unsigned long cacheLineSize;
-	  printf("                                                              \n");
-	  printf("                                                              \n");
-	  printf("                                                              \n");
+	unsigned long cacheSize;
+	unsigned long cacheLineSize;
+	printf("                                                              \n");
+    printf("                                                              \n");
+    printf("                                                              \n");
     printf("                ##############################################\n");
     printf("                ### 计算机组成原理Cache命中率模拟结课作业  ###\n");
     printf("                ###      学院：计算机科学与工程学院        ###\n");
-    printf("                ###         学号:000000000000              ###\n");
-    printf("                ###           姓名：XXX                    ###\n");
+    printf("                ###         学号:201671010107              ###\n");
+    printf("                ###           姓名：冯小丽                 ###\n");
     printf("                ##############################################\n");
     printf("                                                              \n");
     printf("                                                              \n");
@@ -85,41 +85,39 @@ void InterFace(CacheInfo *cacheinfo)
 void OutputResult(CacheInfo *cacheinfo)
 {
 #ifdef DEBUG	
-	  printf("cacheinfo->hitNum==%ld\n",cacheinfo->hitNum);
-	  printf("cacheinfo->hitReadNum==%ld\n",cacheinfo->hitReadNum);
-	  printf("cacheinfo->hitWriteNum==%ld\n",cacheinfo->hitWriteNum);
-	  printf("cacheinfo->totalNum==%ld\n",cacheinfo->totalNum);
-	  printf("cacheinfo->ReadNum==%ld\n",cacheinfo->ReadNum);
-	  printf("cacheinfo->WriteNum==%ld\n",cacheinfo->WriteNum);
-	  printf("cacheinfo->unknownNum==%ld\n",cacheinfo->unknownNum);
+	printf("cacheinfo->hitNum==%ld\n",cacheinfo->hitNum);
+	printf("cacheinfo->hitReadNum==%ld\n",cacheinfo->hitReadNum);
+	printf("cacheinfo->hitWriteNum==%ld\n",cacheinfo->hitWriteNum);
+	printf("cacheinfo->totalNum==%ld\n",cacheinfo->totalNum);
+	printf("cacheinfo->ReadNum==%ld\n",cacheinfo->ReadNum);
+	printf("cacheinfo->WriteNum==%ld\n",cacheinfo->WriteNum);
+	printf("cacheinfo->unknownNum==%ld\n",cacheinfo->unknownNum);
 #endif	  
     
     printf("\n");
-	  printf("                 ################################################\n");
-	  printf("                 ###            cache配置参数说明             ###\n");
-	  printf("                 ###            cache总容量: %06ld KB        ###\n",cacheinfo->icacheSize);
-	  printf("                 ###            cache行容量: %06ld B         ###\n",cacheinfo->icacheLineSize);
-	  printf("                 ###            cache行数: %06ld             ###\n",cacheinfo->blkInf.numLine);
-	  printf("                 ###            cache命中读数量: %06ld       ###\n",cacheinfo->hitReadNum);
-	  printf("                 ###            cache命中写数量: %06ld       ###\n",cacheinfo->hitWriteNum);
-	  printf("                 ###            cache命中总数量: %06ld       ###\n",cacheinfo->hitNum);
-	  printf("                 ###            测试程序地址总数量: %06ld    ###\n",cacheinfo->totalNum);
-	  printf("                 ################################################\n");
+	printf("                 ################################################\n");
+	printf("                 ###            cache配置参数说明             ###\n");
+	printf("                 ###            cache总容量: %06ld KB        ###\n",(long)cacheinfo->icacheSize);
+	printf("                 ###            cache行容量: %06ld B         ###\n",(long)cacheinfo->icacheLineSize);
+	printf("                 ###            cache行数: %06ld             ###\n",cacheinfo->blkInf.numLine);
+	printf("                 ###            cache命中读数量: %06ld       ###\n",cacheinfo->hitReadNum);
+	printf("                 ###            cache命中写数量: %06ld       ###\n",cacheinfo->hitWriteNum);
+	printf("                 ###            cache命中总数量: %06ld       ###\n",cacheinfo->hitNum);
+	printf("                 ###            测试程序地址总数量: %06ld    ###\n",cacheinfo->totalNum);
+	printf("                 ################################################\n");
     printf("\n");
     printf("\n");
     
 
-
-
     printf("                 程序正在运行中，请稍等...\n");
     sleep(3);                
     printf("                 程序正在运行中，请稍等...\n");
     sleep(3);                
-	  printf("                 程序运行完成，最终结果如下所示：\n");
-	  printf("                 \n");
-	  printf("                 \n");
-	  sleep(1);                
-	  printf("                 ################################################\n");
+	printf("                 程序运行完成，最终结果如下所示：\n");
+	printf("                 \n");
+	printf("                 \n");
+	sleep(1);                
+	printf("                 ################################################\n");
     sleep(1); 
     printf("                 ###   平均命中率为：       %02.4f  %%        ###\n",(float)(cacheinfo->hitNum)*100/cacheinfo->totalNum);
     sleep(1); 
