@@ -23,8 +23,8 @@ void InterFace(CacheInfo *cacheinfo)
     printf("                ##############################################\n");
     printf("                ### 计算机组成原理Cache命中率模拟结课作业  ###\n");
     printf("                ###      学院：计算机科学与工程学院        ###\n");
-    printf("                ###         学号:201671010107              ###\n");
-    printf("                ###           姓名：冯小丽                 ###\n");
+    printf("                ###         学号:somebodynumber            ###\n");
+    printf("                ###           姓名：somebody               ###\n");
     printf("                ##############################################\n");
     printf("                                                              \n");
     printf("                                                              \n");
